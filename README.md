@@ -65,6 +65,9 @@ int main()
 <a name="Installation"></a>
 ## Installation
 
+Clone this library from GitHub. The `master` branch contains the stable
+releases. The `develop` branch contains the current development.
+
 The library consists of only a single header file `acunit.h`. It can be copied
 into the directory as needed. Or you can use the `-I` flag of the C compiler to
 tell it where to find it.
@@ -93,7 +96,8 @@ There are 6 macros defined in the `acunit.h` file.
       (like vim) to jump directly to the location of the assertion failure.
 * `ACU_VARS()`
     * Defines the global variables needed by the framework.
-    * Should be added just before the `main()` function.
+    * Should be added just once in a test program, usually just before the
+      `main()` function.
 * `ACU_RUN_TEST(name)`
     * Runs the test function called `name`.
 * `ACU_SUMMARY()`
@@ -155,15 +159,15 @@ I am not an expert on the various versions of the C language. I think that the
 use of an `extern inline` in `acunit.h` means that the C language must be C99 or
 later.
 
-I have tested this library on the following systems:
+I have tested this library on the following systems and compilers using the
+`-std=c99` flag (which should compile with `-std=c11` as well):
 
 * Ubuntu Linux 20.04 LTS
     * gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
-        * using `-std=c99` and `-std=c11`
+    * clang version 10.0.0-4ubuntu1
     * GNU Make 4.2.1
 * MacOS 11.6.8 (Big Sur)
     * Apple clang version 13.0.0 (clang-1300.0.29.30)
-        * using `-std=c99` and `-std=c11`
     * GNU Make 3.8.1
 
 <a name="Motivation"></a>

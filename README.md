@@ -161,6 +161,10 @@ I have tested this library on the following systems:
     * gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
         * using `-std=c99` and `-std=c11`
     * GNU Make 4.2.1
+* MacOS 11.6.8 (Big Sur)
+    * Apple clang version 13.0.0 (clang-1300.0.29.30)
+        * using `-std=c99` and `-std=c11`
+    * GNU Make 3.8.1
 
 <a name="Motivation"></a>
 ## Motivation

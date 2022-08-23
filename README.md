@@ -3,9 +3,11 @@
 Another C Unit testing framework.
 
 This is a simple unit testing framework for the C language (C99 and later)
-inspired by [MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html). The
-library consists of only a single header file `acunit.h` which defines 6 macros.
-Normally only 5 will be used in a unit test program:
+inspired by [MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html) and
+[AUnit](https://github.com/bxparks/AUnit).
+
+The library consists of only a single header file `acunit.h` which defines 6
+macros. Normally only 5 will be used in a unit test program:
 
 * `ACU_TEST(name)`
 * `ACU_ASSERT(boolean_expression)`
@@ -186,7 +188,7 @@ found most of them too complex for my needs.
 * [munit](https://nemequ.github.io/munit/)
 
 The most promising library for my needs was
-[minunit](http://www.jera.com/techinfo/jtns/jtn002.html). But the trouble was
+[MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html). But the trouble was
 that it was *too* simple, I needed a few extra features:
 
 * An assertion error message that printed out the code that triggered
@@ -196,7 +198,9 @@ that it was *too* simple, I needed a few extra features:
 * Helper macros (`ACU_TEST()`, `ACU_ASSERT()`, `ACU_RUN_TEST()`, `ACU_VARS()`,
   `ACU_SUMMARY()`) to reduce some of the boilerplate code.
 
-Adding those features resulted in this library.
+Many of those macros were inspired by the
+[AUnit](https://github.com/bxparks/AUnit) library that I created for the Arduino
+programming environment. Adding those features resulted in this library.
 
 <a name="License"></a>
 ## License

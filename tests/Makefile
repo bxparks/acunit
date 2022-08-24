@@ -1,4 +1,4 @@
-CFLAGS := -Wall -Wextra -Werror -pedantic -std=c99 -I../src
+CFLAGS := -std=c99 -Wall -Wextra -Wconversion -Werror -pedantic -I../src
 
 TARGETS := simple_asserts_test.out assert_with_message_test.out
 

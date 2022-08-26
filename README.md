@@ -1,13 +1,10 @@
 # ACUnit
 
-Another C Unit testing framework.
-
-This is a simple unit testing framework for the C language (C99 and later)
-inspired by [MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html) and
-[AUnit](https://github.com/bxparks/AUnit).
-
-The library consists of only a single header file `acunit.h` which defines 6
-macros. Normally only 5 will be used in a unit test program:
+A simple C unit testing framework for the C language (C99 and later) inspired by
+[MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html) and
+[AUnit](https://github.com/bxparks/AUnit). The library consists of only a single
+header file `acunit.h` which defines 6 macros. Normally only 5 will be used in a
+unit test program:
 
 * `ACU_TEST(name)`
 * `ACU_ASSERT(boolean_expression)`

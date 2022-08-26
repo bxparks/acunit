@@ -100,13 +100,7 @@ extern inline void acu_assertion(
   }
 }
 
-/**
- * Implement the 1-argument ACU_ASSERT() macro. If we try to use a CPP trick
- * (https://stackoverflow.com/questions/11761703) to overload ACU_ASSERT() to
- * take 1 or 2 arguments, we get a GCC error message saying that 'ISO C99
- * requires at least one argument for the "..." in a variadic macro'. So we have
- * to use a separate acu_assert_msg() for the 2 parameter version.
- */
+/** Implement the 1-argument ACU_ASSERT() macro. */
 #define ACU_ASSERT(condition) \
   do { \
     if (!(condition)) { \
@@ -116,7 +110,12 @@ extern inline void acu_assertion(
     } \
   } while (0)
 
-/** Implement the 2-argument ACU_ASSERT() macro with a message. */
+/**
+ * Implement the 2-argument ACU_ASSERT() macro with a message. If we try to use
+ * a CPP trick (https://stackoverflow.com/questions/11761703) to overload
+ * ACU_ASSERT() to take 1 or 2 arguments, we get a GCC error message saying that
+ * 'ISO C99 requires at least one argument for the "..." in a variadic macro'.
+ */
 #define ACU_ASSERT_MSG(condition, message) \
   do { \
     if (!(condition)) { \

@@ -1,5 +1,7 @@
 # ACUnit
 
+[![Unit Tests](https://github.com/bxparks/ACUnit/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/bxparks/ACUnit/actions/workflows/unit_tests.yml)
+
 A simple C unit testing framework for the C language (C99 and later) inspired by
 [MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html) and
 [AUnit](https://github.com/bxparks/AUnit). The library consists of only a single

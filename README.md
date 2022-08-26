@@ -63,6 +63,14 @@ int main()
 }
 ```
 
+Compiling and running this prints the following:
+
+```
+PASSED: test_integers_are_equal
+PASSED: test_strings_are_not_equal
+Summary: PASSED: 2 tests(s)
+```
+
 <a name="Installation"></a>
 ## Installation
 
@@ -133,7 +141,6 @@ $ make
 $ make runtests
 [...]
 ==== Running simple_asserts_test.out
-PASSED: test_chars_are_equal
 PASSED: test_integers_are_equal
 PASSED: test_strings_are_not_equal
 Summary: PASSED: 3 tests(s)

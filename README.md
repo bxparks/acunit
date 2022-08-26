@@ -153,12 +153,14 @@ If one of tests fail, then the output will look like:
 
 ```
 ==== Running simple_asserts_test.out
-PASSED: test_chars_are_equal
-simple_asserts_test.c:15: Assertion failed: [x == y] is false
+simple_asserts_test.c:8: Assertion failed: [x == y] is false
 FAILED: test_integers_are_equal
 PASSED: test_strings_are_not_equal
-Summary: FAILED: 1 failed out of 3 test(s)
+Summary: FAILED: 1 failed out of 2 test(s)
 ```
+
+Some text editors (e.g. vim) can parse the error message and navigate directly
+to the location of the test failure (File: `simple_asserts_test.c`, Line: 8).
 
 <a name="SystemRequirements"></a>
 ## System Requirements

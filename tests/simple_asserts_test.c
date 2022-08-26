@@ -4,7 +4,7 @@
 ACU_TEST(test_integers_are_equal)
 {
   int x = 3;
-  int y = 3;
+  int y = 4;
   ACU_ASSERT(x == y);
 }
 

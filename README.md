@@ -149,9 +149,10 @@ $ make runtests
 PASSED: test_integers_are_equal
 PASSED: test_strings_are_not_equal
 Summary: PASSED: 3 tests(s)
-==== Running assert_with_message_test.out
+==== Running advanced_asserts_test.out
 PASSED: test_assert_with_message
-Summary: PASSED: 1 tests(s)
+PASSED: test_assert_no_fatal_failure
+Summary: PASSED: 2 tests(s)
 ```
 
 If one of tests fail, then the output will look like:

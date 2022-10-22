@@ -151,3 +151,10 @@ extern inline void acu_assertion(
     } \
     return acu_tests_failed != 0; \
   } while (0)
+
+/** Execute the `assertion` function, and return if the assertion failed. */
+#define ACU_ASSERT_NO_FATAL_FAILURE(assertion) \
+  do { \
+    assertion; \
+    if (! acu_test_status) return; \
+  } while (0)

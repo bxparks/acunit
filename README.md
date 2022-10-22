@@ -90,7 +90,7 @@ The unit test program must include the header file like this:
 #include <acunit.h>
 ```
 
-There are 6 macros defined in the `acunit.h` file.
+There are 7 macros defined in the `acunit.h` file.
 
 * `ACU_TEST(name)`
     * Defines a unit test function called `name`.
@@ -117,6 +117,11 @@ There are 6 macros defined in the `acunit.h` file.
 * `ACU_ASSERT_MSG(name, msg)`
     * A variant of `ACU_ASSERT()` that prints out `msg` if the assertion fails.
     * Useful for adding more context to the default error message.
+* `ACU_ASSERT_NO_FATAL_FAILURE(assertion)`
+    * Execute the given `assertion` statement, then return immediately if a
+      fatal assertion was encountered.
+    * Useful when a collection of `ACU_ASSERT()` statements are refactored
+      into a sub-function.
 
 The library assumes that a single `*.c` test file will be self-contained and
 generates a single executable file (e.g. `*.out`). The `main()` function

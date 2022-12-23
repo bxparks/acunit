@@ -46,36 +46,42 @@ SOFTWARE.
 #include <stdio.h>
 
 /**
- * Used to return the pass (1) or fail (0) status of a specific unit test. A
- * global variable is used to make the unit test function simpler to write. If
- * the status was returned using the return value of the test function (i.e.
- * making ACU_TEST() define a function that returns an 'int'), then we are
- * forced to end each test function with a 'return 1' statement. This return
- * statement is very easy to forget, and it quickly becomes annoying. Using a
- * global variable allows the unit test functions to have a similar structure to
- * other unit testing frameworks from other languages.
+ * A data struct passed into each test function and holds the result of the
+ * test.
  *
- * The disadvantage of using a global variable is that it prevents ACUnit from
- * supporting multiple threads. It might be possible to use thread-local
- * variables for this, but I have not spent any time researching this because my
- * tests are small enough that I don't need to use multiple threads.
+ * It may be possible to extend ACUnit to support multiple threads. But I have
+ * not spent any time researching this because my tests are small enough that I
+ * don't need to use multiple threads.
  */
-extern int acu_test_status;
+typedef struct AcuContext {
+  /**
+   * Holds the the pass (0) or fail (!=0) err code of a specific unit test. This
+   * is set to 0 before calling each test.
+   *
+   * The alternative design is to return the err code as a return value of the
+   * function (i.e. making ACU_TEST() define a function that returns an 'int').
+   * But that forces each test function to terminate with a 'return 1'
+   * statement. This return statement is very easy to forget, and it quickly
+   * becomes annoying. Using the AcuContext object to return the err code solves
+   * that usuability problem.
+   */
+  int err;
 
-/** Number of unit tests that were executed. */
-extern int acu_tests_executed;
+  /** Number of unit tests that were executed. */
+  int executed_count;
 
-/** Number of unit tests that failed. */
-extern int acu_tests_failed;
+  /** Number of unit tests that failed. */
+  int failed_count;
+} AcuContext;
 
-/** Define the global variables required by ACUnit. */
-#define ACU_VARS() \
-  int acu_test_status = 0; \
-  int acu_tests_executed = 0; \
-  int acu_tests_failed = 0
+/** Define the context required by ACUnit. */
+#define ACU_CONTEXT() AcuContext acu_context = {0, 0, 0}
 
-/** Define a test function that returns 0 on failure, 1 on success.. */
-#define ACU_TEST(name) void name(void)
+/**
+ * Define a test function that sets the acu_context.err to 1 on failure, 0 on
+ * success.
+ */
+#define ACU_TEST(name) void name(AcuContext *acu_context)
 
 /**
  * Print assertion failure message. The format is compatible with the error
@@ -86,13 +92,14 @@ extern int acu_tests_failed;
  * `long` in C11 (https://stackoverflow.com/questions/5075928).
  */
 extern inline void acu_assertion(
+  AcuContext *acu_context,
   const char *file,
   long line,
   const char *condition,
   const char *message)
 {
   printf("%s:%ld: Assertion failed: [%s] is false", file, line, condition);
-  acu_tests_failed++;
+  acu_context->failed_count++;
   if (message) {
     printf(": %s\n", message);
   } else {
@@ -104,8 +111,8 @@ extern inline void acu_assertion(
 #define ACU_ASSERT(condition) \
   do { \
     if (!(condition)) { \
-      acu_assertion(__FILE__, __LINE__, #condition, NULL); \
-      acu_test_status = 0; \
+      acu_assertion(acu_context, __FILE__, __LINE__, #condition, NULL); \
+      acu_context->err = 1; \
       return; \
     } \
   } while (0)
@@ -119,8 +126,8 @@ extern inline void acu_assertion(
 #define ACU_ASSERT_MSG(condition, message) \
   do { \
     if (!(condition)) { \
-      acu_assertion(__FILE__, __LINE__, #condition, message); \
-      acu_test_status = 0; \
+      acu_assertion(acu_context, __FILE__, __LINE__, #condition, message); \
+      acu_context->err = 1; \
       return; \
     } \
   } while (0)
@@ -131,30 +138,30 @@ extern inline void acu_assertion(
  */
 #define ACU_RUN_TEST(test) \
   do { \
-    acu_test_status = 1; \
-    test(); \
-    acu_tests_executed++; \
-    printf("%s: %s\n", (acu_test_status ? "PASSED" : "FAILED"), #test); \
+    acu_context.err = 0; \
+    test(&acu_context); \
+    acu_context.executed_count++; \
+    printf("%s: %s\n", (acu_context.err ? "FAILED" : "PASSED"), #test); \
   } while (0)
 
 /**
  * Print out the test summary. Returns 1 if any test failed, which causes the
- * `main()` function to return a non-zero exit status to indicate failure.
+ * `main()` function to return a non-zero exit code to indicate failure.
  */
 #define ACU_SUMMARY() \
   do { \
-    if (acu_tests_failed) { \
+    if (acu_context.failed_count) { \
       printf("Summary: FAILED: %d failed out of %d test(s)\n", \
-          acu_tests_failed, acu_tests_executed); \
+          acu_context.failed_count, acu_context.executed_count); \
     } else { \
-      printf("Summary: PASSED: %d tests(s)\n", acu_tests_executed); \
+      printf("Summary: PASSED: %d tests(s)\n", acu_context.executed_count); \
     } \
-    return acu_tests_failed != 0; \
+    return acu_context.failed_count != 0; \
   } while (0)
 
 /** Execute the `assertion` function, and return if the assertion failed. */
 #define ACU_ASSERT_NO_FATAL_FAILURE(assertion) \
   do { \
     assertion; \
-    if (! acu_test_status) return; \
+    if (acu_context->err) return; \
   } while (0)

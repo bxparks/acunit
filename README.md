@@ -8,9 +8,9 @@ A simple C unit testing framework for the C language (C99 and later) inspired by
 header file `acunit.h` which defines 6 macros. Normally only 5 will be used in a
 unit test program:
 
+* `ACU_CONTEXT()`
 * `ACU_TEST(name)`
 * `ACU_ASSERT(boolean_expression)`
-* `ACU_VARS()`
 * `ACU_RUN_TEST(name)`
 * `ACU_SUMMARY()`
 
@@ -53,7 +53,7 @@ ACU_TEST(test_strings_are_not_equal)
 
 //-----------------------------------------------------------------------------
 
-ACU_VARS();
+ACU_CONTEXT();
 
 int main()
 {
@@ -92,21 +92,23 @@ The unit test program must include the header file like this:
 
 There are 7 macros defined in the `acunit.h` file.
 
+* `ACU_CONTEXT()`
+    * Defines an `AcuContext acu_context` object which is passed into each
+      test function.
+    * Should be invoked only once in a test program, usually just before the
+      `main()` function.
 * `ACU_TEST(name)`
-    * Defines a unit test function called `name`.
+    * Convenience macro that defines a unit test function called `name` with the
+      signature `void name(AcuContext *acu_context)`.
     * The macro should be followed by the body of the function enclosed in
       curly brace `{}`.
 * `ACU_ASSERT(boolean_expression)`
-    * Verifies that the expression is true.
+    * Verifies that the `expression` is true.
     * If false, prints an error message and returns from the test function
       immediately.
     * The format of the error message is identical to the format used by the C
       compiler. This means that the error message can be parsed by text editors
       (like vim) to jump directly to the location of the assertion failure.
-* `ACU_VARS()`
-    * Defines the global variables needed by the framework.
-    * Should be added just once in a test program, usually just before the
-      `main()` function.
 * `ACU_RUN_TEST(name)`
     * Runs the test function called `name`.
 * `ACU_SUMMARY()`
@@ -209,12 +211,16 @@ that it was *too* simple, I needed a few extra features:
   the assertion, to help debugging.
 * An assertion error message with the file name and line number of the
   assertion, in a format compatible with the `vim` editor for quick navigation.
-* Helper macros (`ACU_TEST()`, `ACU_ASSERT()`, `ACU_RUN_TEST()`, `ACU_VARS()`,
-  `ACU_SUMMARY()`) to reduce some of the boilerplate code.
+* Helper macros (`ACU_TEST()`, `ACU_ASSERT()`, `ACU_RUN_TEST()`,
+  `ACU_CONTEXT()`, `ACU_SUMMARY()`) to reduce some of the boilerplate code.
 
 Many of those macros were inspired by the
 [AUnit](https://github.com/bxparks/AUnit) library that I created for the Arduino
 programming environment. Adding those features resulted in this library.
+
+The `AcuContext` object was inspired by the [Go language testing
+framework](https://go.dev/doc/code#Testing) which passes a `t *testing.T` object
+into each test function.
 
 <a name="License"></a>
 ## License

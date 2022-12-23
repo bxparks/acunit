@@ -17,7 +17,7 @@ ACU_TEST(test_strings_are_not_equal)
 
 //-----------------------------------------------------------------------------
 
-ACU_VARS();
+ACU_CONTEXT();
 
 int main()
 {

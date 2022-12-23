@@ -11,7 +11,9 @@ ACU_TEST(test_assert_with_message)
 
 //-----------------------------------------------------------------------------
 
-static void check_some_condition() {
+// If the ACU_ASSERT() macro is refactored into a sub-function, the acu_context
+// object must be passed in manually from the calling test function.
+static void check_some_condition(AcuContext *acu_context) {
   int a = 1;
   int b = 1;
   int c = 2;
@@ -21,12 +23,12 @@ static void check_some_condition() {
 
 ACU_TEST(test_assert_no_fatal_failure)
 {
-  ACU_ASSERT_NO_FATAL_FAILURE(check_some_condition());
+  ACU_ASSERT_NO_FATAL_FAILURE(check_some_condition(acu_context));
 }
 
 //-----------------------------------------------------------------------------
 
-ACU_VARS();
+ACU_CONTEXT();
 
 int main()
 {

@@ -1,13 +1,6 @@
 #include <acunit.h>
 #include <string.h>
 
-ACU_TEST(test_chars_are_equal)
-{
-  char c = 'c';
-  char d = 'c';
-  ACU_ASSERT(c == d);
-}
-
 ACU_TEST(test_integers_are_equal)
 {
   int x = 3;
@@ -22,13 +15,12 @@ ACU_TEST(test_strings_are_not_equal)
   ACU_ASSERT(strcmp(s, t) != 0);
 }
 
-/***************************************************************/
+//-----------------------------------------------------------------------------
 
-ACU_VARS();
+ACU_CONTEXT();
 
 int main()
 {
-  ACU_RUN_TEST(test_chars_are_equal);
   ACU_RUN_TEST(test_integers_are_equal);
   ACU_RUN_TEST(test_strings_are_not_equal);
   ACU_SUMMARY();

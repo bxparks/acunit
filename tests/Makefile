@@ -1,6 +1,6 @@
-CFLAGS := -Wall -Wextra -Werror -ansi -pedantic -std=c99 -I../src
+CFLAGS := -std=c99 -Wall -Wextra -Wconversion -Werror -pedantic -I../src
 
-TARGETS := simple_asserts_test.out assert_with_message_test.out
+TARGETS := simple_asserts_test.out advanced_asserts_test.out
 
 all: $(TARGETS)
 
@@ -11,10 +11,10 @@ simple_asserts_test.out: simple_asserts_test.o
 
 simple_asserts_test.o: simple_asserts_test.c
 
-assert_with_message_test.out: assert_with_message_test.o
+advanced_asserts_test.out: advanced_asserts_test.o
 	$(CC) -o $@ $^
 
-assert_with_message_test.o: assert_with_message_test.c
+advanced_asserts_test.o: advanced_asserts_test.c
 
 runtests:
 	set -e; \

@@ -14,7 +14,7 @@ unit test program:
 * `ACU_RUN_TEST(name)`
 * `ACU_SUMMARY()`
 
-**Version**: 0.0.0 (2022-08-22)
+**Version**: 0.1.0 (2022-12-23)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 

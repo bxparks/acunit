@@ -3,16 +3,24 @@
 [![Unit Tests](https://github.com/bxparks/ACUnit/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/bxparks/ACUnit/actions/workflows/unit_tests.yml)
 
 A simple C unit testing framework for the C language (C99 and later) inspired by
-[MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html) and
-[AUnit](https://github.com/bxparks/AUnit). The library consists of only a single
-header file `acunit.h` which defines 6 macros. Normally only 5 will be used in a
-unit test program:
+[MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html),
+[AUnit](https://github.com/bxparks/AUnit), and [Go lang
+testing](https://pkg.go.dev/testing). The library consists of only a single
+header file `<acunit.h>` which defines 7 macros. It has no dependencies other
+than `printf()` from `<stdio.h>` so that error messages can be printed.
+
+Normally only 5 macros will be used in a unit test program:
 
 * `ACU_CONTEXT()`
 * `ACU_TEST(name)`
 * `ACU_ASSERT(boolean_expression)`
 * `ACU_RUN_TEST(name)`
 * `ACU_SUMMARY()`
+
+The other 2 macros are intended for more advanced usage:
+
+* `ACU_ASSERT_MSG(name, msg)`
+* `ACU_ASSERT_NO_FATAL_FAILURE()`
 
 **Version**: 0.1.0 (2022-12-23)
 
@@ -26,6 +34,7 @@ unit test program:
 * [Examples](#Examples)
 * [System Requirements](#SystemRequirements)
 * [Motivation](#Motivation)
+* [Bugs and Limitations](#BugsAndLimitations)
 * [License](#License)
 * [Feedback and Support](#FeedbackAndSupport)
 * [Authors](#Authors)
@@ -180,6 +189,10 @@ later.
 I have tested this library on the following systems and compilers using the
 `-std=c99` flag (which should compile with `-std=c11` as well):
 
+* Ubuntu Linux 22.04 LTS
+    * gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0
+    * Ubuntu clang version 14.0.0-1ubuntu1
+    * GNU Make 4.3
 * Ubuntu Linux 20.04 LTS
     * gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
     * clang version 10.0.0-4ubuntu1
@@ -219,8 +232,17 @@ Many of those macros were inspired by the
 programming environment. Adding those features resulted in this library.
 
 The `AcuContext` object was inspired by the [Go language testing
-framework](https://go.dev/doc/code#Testing) which passes a `t *testing.T` object
-into each test function.
+framework](https://pkg.go.dev/testing) which passes a `t *testing.T` object into
+each test function.
+
+<a name="BugsAndLimitations"></a>
+## Bugs and Limitations
+
+The `ACU_CONTEXT()` macro creates a single global instance of `acu_context`
+which is passed into each test function. All test functions are executed in a
+single thread. It may be possible to add support for multiple threads using
+multiple instances of `AcuContext`, but I have not spent any time thinking about
+this.
 
 <a name="License"></a>
 ## License

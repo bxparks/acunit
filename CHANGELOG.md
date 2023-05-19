@@ -1,6 +1,8 @@
 # Changelog
 
 * Unreleased
+    * Change project path to `acunit`, while retaining ACUnit as the
+      human-readable name of the library.
 * 0.1.0 (2022-12-23)
     * Create `AcuContext` struct to replace global variables
       (`acu_tests_status`, `acu_tests_executed` and `acu_tests_failed`)

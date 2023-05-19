@@ -26,7 +26,7 @@ SOFTWARE.
  * @mainpage ACUnit Library
  *
  * This is the Doxygen documentation for the
- * <a href="https://github.com/bxparks/ACUnit">ACUnit Library</a>.
+ * <a href="https://github.com/bxparks/acunit">ACUnit Library</a>.
  *
  * Click on the "Classes" menu above to see the list of classes.
  *
@@ -34,7 +34,7 @@ SOFTWARE.
  */
 
 /**
- * @file ACUnit.h
+ * @file acunit.h
  *
  * A minimal unit testing framework for the C language.
  *

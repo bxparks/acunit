@@ -14,11 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    #- name: Setup
-    #  run: |
-    #    cd ..
-    #    git clone https://github.com/bxparks/ACUnit
-
     #- name: Verify examples
     #  run: |
     #    make -C examples

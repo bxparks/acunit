@@ -22,7 +22,7 @@ The other 2 macros are intended for more advanced usage:
 * `ACU_ASSERT_MSG(name, msg)`
 * `ACU_ASSERT_NO_FATAL_FAILURE()`
 
-**Version**: 0.1.0 (2022-12-23)
+**Version**: 0.2.0 (2023-05-19)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 

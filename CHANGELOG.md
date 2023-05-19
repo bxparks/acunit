@@ -1,6 +1,7 @@
 # Changelog
 
 * Unreleased
+* 0.2.0 (2023-05-19)
     * Change project path to `acunit`, while retaining ACUnit as the
       human-readable name of the library.
 * 0.1.0 (2022-12-23)

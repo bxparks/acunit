@@ -1,13 +1,13 @@
 # ACUnit
 
-[![Unit Tests](https://github.com/bxparks/ACUnit/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/bxparks/ACUnit/actions/workflows/unit_tests.yml)
+[![Unit Tests](https://github.com/bxparks/acunit/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/bxparks/acunit/actions/workflows/unit_tests.yml)
 
-A simple C unit testing framework for the C language (C99 and later) inspired by
-[MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html),
-[AUnit](https://github.com/bxparks/AUnit), and [Go lang
-testing](https://pkg.go.dev/testing). The library consists of only a single
-header file `<acunit.h>` which defines 7 macros. It has no dependencies other
-than `printf()` from `<stdio.h>` so that error messages can be printed.
+ACUnit is a simple C unit testing framework for the C language (C99 and later)
+inspired by [MinUnit](http://www.jera.com/techinfo/jtns/jtn002.html),
+[AUnit](https://github.com/bxparks/AUnit) for Arduino, and [Go lang
+testing](https://pkg.go.dev/testing) framework. The library consists of only a
+single header file `<acunit.h>` which defines 7 macros. It has no dependencies
+other than `printf()` from `<stdio.h>` so that error messages can be printed.
 
 Normally only 5 macros will be used in a unit test program:
 
@@ -22,7 +22,7 @@ The other 2 macros are intended for more advanced usage:
 * `ACU_ASSERT_MSG(name, msg)`
 * `ACU_ASSERT_NO_FATAL_FAILURE()`
 
-**Version**: 0.1.0 (2022-12-23)
+**Version**: 0.2.0 (2023-05-19)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
@@ -83,12 +83,18 @@ Summary: PASSED: 2 tests(s)
 <a name="Installation"></a>
 ## Installation
 
-Clone this library from GitHub. The `master` branch contains the stable
-releases. The `develop` branch contains the current development.
+Clone this library from GitHub:
+
+```
+$ git clone git@github.com:bxparks/acunit.git
+```
+
+The `master` branch contains the stable releases.
+The `develop` branch contains the current development.
 
 The library consists of only a single header file `acunit.h`. It can be copied
 into the directory as needed. Or you can use the `-I` flag of the C compiler to
-tell it where to find it.
+tell it where to find it. See [tests/Makefile](tests/Makefile) for an example.
 
 <a name="Usage"></a>
 ## Usage
@@ -254,9 +260,9 @@ this.
 
 If you have any questions, comments, or feature requests for this library,
 please use the [GitHub
-Discussions](https://github.com/bxparks/ACUnit/discussions) for this project. If
+Discussions](https://github.com/bxparks/acunit/discussions) for this project. If
 you have bug reports, please file a ticket in [GitHub
-Issues](https://github.com/bxparks/ACUnit/issues). Feature requests should go
+Issues](https://github.com/bxparks/acunit/issues). Feature requests should go
 into Discussions first because they often have alternative solutions which are
 useful to remain visible, instead of disappearing from the default view of the
 Issue tracker after the ticket is closed.
